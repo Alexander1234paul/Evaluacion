@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="evaluacionDS"
+		transaction-type="JTA">
+		<jta-data-source>java:/evaluacionDS</jta-data-source>
+		<class>evaluacion.model.entities.Cliente</class>
+		<class>evaluacion.model.entities.DetalleProforma</class>
+		<class>evaluacion.model.entities.EntregaFinal</class>
+		<class>evaluacion.model.entities.Genero</class>
+		<class>evaluacion.model.entities.Gerente</class>
+		<class>evaluacion.model.entities.OrdenProduccion</class>
+		<class>evaluacion.model.entities.Persona</class>
+		<class>evaluacion.model.entities.Proforma</class>
+		<class>evaluacion.model.entities.Talla</class>
+		<class>evaluacion.model.entities.UniformeDeportivo</class>
+		<class>evaluacion.model.entities.Vendedor</class>
+	</persistence-unit>
+</persistence>
