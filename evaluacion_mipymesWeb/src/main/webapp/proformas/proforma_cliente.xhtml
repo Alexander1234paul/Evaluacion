@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Menu Proformas Clientes</title>
+</h:head> 
+<body> 
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Clientes" icon="pi pi-users"
+				action="/clientes/index" />
+			<p:menuitem value="Uniformes" icon="pi pi-briefcase"
+				action="/uniformes/index" />
+			<p:menuitem value="Ventas" icon="pi pi-shopping-cart"
+				action="/ventas/index" />
+			<p:menuitem value="Proformas" icon="pi pi-list"
+				action="index" />
+			<f:facet name="options">
+				<p:commandButton value="Regresar" action="../index" icon="pi pi-home">
+				</p:commandButton>
+			</f:facet>
+		</p:menubar>
+		<p:staticMessage severity="info" summary="Módulo de Proformas"></p:staticMessage>
+		<p:panel>
+			<p:dataTable value="#{beanCliente.listaProformaCliente}" var="c">
+				<p:column headerText="Cliente">
+					<h:outputText value="#{c.cliente.persona.perNombres} #{c.cliente.persona.perApellidos}" />
+				</p:column>
+				<p:column headerText="Abono">
+					<h:outputText value="#{c.profAbono}" />
+				</p:column>
+				
+				<p:column headerText="Saldo">
+					<h:outputText value="#{c.profSaldo}" />
+				</p:column>
+				
+				<p:column headerText="Entregado">
+					<h:outputText value="#{c.profEntregado}" />
+				</p:column>
+				
+				<p:column headerText="Fecha Emision">
+					<h:outputText value="#{c.profFechaEmision}" />
+				</p:column>
+				
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{c.profCantidad}" />
+				</p:column>
+				
+				<p:column headerText="Valor Total">
+					<h:outputText value="#{c.profValorTotal}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</body> 
+</html>

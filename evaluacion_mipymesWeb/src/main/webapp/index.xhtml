@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+	<title>Menu principal</title>
+</h:head> 
+<body> 
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Clientes" icon="pi pi-users"
+				action="/clientes/index" />
+			<p:menuitem value="Uniformes" icon="pi pi-briefcase"
+				action="/uniformes/index" />
+			<p:menuitem value="Ventas" icon="pi pi-shopping-cart"
+				action="/ventas/index" />
+			<p:menuitem value="Proformas" icon="pi pi-list"
+				action="/proformas/index" />
+			<f:facet name="options">
+				<p:commandButton value="Regresar" action="../index" icon="pi pi-home">
+				</p:commandButton>
+			</f:facet>
+		</p:menubar>
+		<div align="center">
+			<p:panel>
+				<p:staticMessage severity="info" summary="Módulo de Inicio"></p:staticMessage>
+			</p:panel>
+		</div>
+	</h:form>
+</body> 
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Menu Clientes</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate></p:autoUpdate>
+	</p:growl>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Clientes" icon="pi pi-users" action="index" />
+			<p:menuitem value="Uniformes" icon="pi pi-briefcase"
+				action="/uniformes/index" />
+			<p:menuitem value="Ventas" icon="pi pi-shopping-cart"
+				action="/ventas/index" />
+			<p:menuitem value="Proformas" icon="pi pi-list"
+				action="/proformas/index" />
+			<f:facet name="options">
+				<p:commandButton value="Regresar" action="../index"
+					icon="pi pi-home">
+				</p:commandButton>
+			</f:facet>
+		</p:menubar>
+		<div align="center">
+			<p:panel>
+				<p:staticMessage severity="info" summary="Módulo de Clientes"></p:staticMessage>
+			</p:panel>
+		</div>
+		<div align="center">
+			<p:panel>
+				<p:panelGrid columns="2">
+					<h:outputText value="Cedula: " />
+					<p:inputText size="25" maxlength="60"
+						value="#{beanCliente.persona.idPersona}"></p:inputText>
+					<h:outputText value="Nombre: " />
+					<p:inputText size="25" maxlength="60"
+						value="#{beanCliente.persona.perNombres}"></p:inputText>
+					<h:outputText value="Apellido: " />
+					<p:inputText size="25" maxlength="60"
+						value="#{beanCliente.persona.perApellidos}"></p:inputText>
+					<h:outputText value="Genero " />
+					<p:selectOneMenu value="#{beanCliente.idGenero}">
+						<f:selectItems value="#{beanCliente.listaGeneros}" var="genero"
+							itemLabel="#{genero.genNombre}" itemValue="#{genero.idGenero}"></f:selectItems>
+					</p:selectOneMenu>
+					<h:outputText value="Fecha Nacimiento: " />
+					<p:datePicker id="basic"
+						value="#{beanCliente.persona.perFechaNacimiento}"></p:datePicker>
+					<h:outputText value="Direccion: " />
+					<p:inputText size="25" maxlength="60"
+						value="#{beanCliente.persona.perDireccion}"></p:inputText>
+					<h:outputText value="Email: " />
+					<p:inputText size="25" maxlength="60"
+						value="#{beanCliente.persona.perEmail}"></p:inputText>
+				</p:panelGrid>
+				<div align="center">
+					<p:panel>
+						<p:commandButton value="Registrar Persona" icon="pi pi-save"
+							update="@form"
+							action="#{beanCliente.actionRegistrarPersona()}"></p:commandButton>
+					</p:panel>
+				</div>
+			</p:panel>
+		</div>
+	</h:form>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Menu Uniformes</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate></p:autoUpdate>
+	</p:growl>
+	<h:form id="form">
+		<p:menubar>
+			<p:menuitem value="Clientes" icon="pi pi-users"
+				action="/clientes/index" />
+			<p:menuitem value="Uniformes" icon="pi pi-briefcase"
+				action="/uniformes/index" />
+			<p:menuitem value="Ventas" icon="pi pi-shopping-cart"
+				action="/ventas/index" />
+			<p:menuitem value="Proformas" icon="pi pi-list"
+				action="/proformas/index" />
+			<f:facet name="options">
+				<p:commandButton value="Regresar" action="../index"
+					icon="pi pi-home">
+				</p:commandButton>
+			</f:facet>
+		</p:menubar>
+		<div align="center">
+			<p:panel>
+				<p:staticMessage severity="info" summary="Módulo de Uniformes"></p:staticMessage>
+			</p:panel>
+		</div>
+		<p:panel>
+			<div align="center">
+				<p:panel>
+
+
+					<p:commandButton value="Seleccionar Talla del Uniforme Deportivo"
+						icon="pi pi-plus" oncomplete="PF('manageProductDialog').show()"
+						styleClass="ui-button-success" style="margin-right: .5rem">
+						<p:resetInput target=":form:manage-product-content" />
+					</p:commandButton>
+
+
+
+					<p:dialog header="Product Details" showEffect="fade" modal="true"
+						widgetVar="manageProductDialog" responsive="true">
+						<p:outputPanel id="manage-product-content" class="ui-fluid">
+							<div align="center">
+								<p:panel>
+									<div align="center">
+										<p:panelGrid columns="2">
+											<h:outputText value="Descripcion:" />
+											<p:selectOneMenu value="#{beanCliente.idTalla}">
+												<f:selectItems value="#{beanCliente.listaTallas}"
+													var="talla" itemLabel="#{talla.tallaNombre}"
+													itemValue="#{talla.idTalla}"></f:selectItems>
+											</p:selectOneMenu>
+										</p:panelGrid>
+									</div>
+								</p:panel>
+							</div>
+						</p:outputPanel>
+
+						<f:facet name="footer">
+							<p:commandButton value="Seleccionar Talla - Modelo"
+								icon="pi pi-check" update="@form"
+								process="manage-product-content @this"
+								onclick="PF('manageProductDialog').hide()"
+								actionListener="#{beanCliente.actionListenerSeleccionarTalla()}" />
+							<p:commandButton value="Cancelar" icon="pi pi-times"
+								onclick="PF('manageProductDialog').hide()"
+								class="ui-button-secondary" />
+						</f:facet>
+					</p:dialog>
+
+					<p:dataTable value="#{beanCliente.listaUniformesByTalla}"
+						var="tallas">
+						<p:column headerText="ID Talla">
+							<h:outputText value="#{tallas.talla.idTalla}" />
+						</p:column>
+						<p:column headerText="ID Uniforme">
+							<h:outputText value="#{tallas.idUniforme}" />
+						</p:column>
+						<p:column headerText="Descripcion Modelo">
+							<h:outputText value="#{tallas.talla.tallaNombre}" />
+						</p:column>
+						<p:column headerText="Descripcion Uniforme">
+							<h:outputText value="#{tallas.uniDescripcion}" />
+						</p:column>
+						<p:column headerText="Dorsal">
+							<h:outputText value="#{tallas.uniDorsal}" />
+						</p:column>
+						<p:column headerText="Precio">
+							<h:outputText value="#{tallas.uniPrecio}" />
+						</p:column>
+						<p:column headerText="Opciones">
+
+
+							<p:commandButton value="Agregar Uniforme Deportivo"
+								icon="pi pi-shopping-cart"
+								oncomplete="PF('manageProductDialog1').show()"
+								styleClass="ui-button-secondary" style="margin-right: .5rem">
+								<p:resetInput target=":form:manage-product-content" />
+							</p:commandButton>
+
+
+
+							<div align="center" style="width: 400; height: 350">
+								<p:dialog header="Detalles del Uniforme" showEffect="fade"
+									modal="true" widgetVar="manageProductDialog1" responsive="true">
+									<p:outputPanel id="manage-product-content" class="ui-fluid">
+										<div align="center">
+											<p:panel>
+												<div align="center">
+													<p:panelGrid columns="2">
+														<h:outputText value="Cantidad:" />
+														<p:spinner value="#{beanCliente.cantidad}" max="20"
+															min="1"></p:spinner>
+														<h:outputText value="Uniforme Seleccionado" />
+														<p:inputText value="#{beanCliente.id_uniforme}" label="#{tallas.idUniforme}"></p:inputText>
+													</p:panelGrid>
+												</div>
+											</p:panel>
+										</div>
+									</p:outputPanel>
+
+									
+										<p:commandButton value="Seleccionar Talla - Modelo"
+											icon="pi pi-check" update="@form,:form2"
+											onclick="PF('manageProductDialog1').hide()"
+											actionListener="#{beanCliente.actionListenerAgregarUniforme(tallas.idUniforme)}" />
+										<p:commandButton value="Cancelar" icon="pi pi-times"
+											onclick="PF('manageProductDialog1').hide()"
+											class="ui-button-secondary" />
+									
+								</p:dialog>
+							</div>
+
+
+
+
+						</p:column>
+					</p:dataTable>
+
+
+
+
+
+				</p:panel>
+			</div>
+		</p:panel>
+	</h:form>
+
+	<h:form id="form2">
+		<div align="center">
+			<div align="center">
+				<p:panel>
+					<p:staticMessage severity="info"
+						summary="Modelos y Tallas de los uniformes Agregados"></p:staticMessage>
+				</p:panel>
+			</div>
+			<p:dataTable value="#{beanCliente.proforma.detalleProformas}"
+				var="pr">
+				<p:column headerText="ID UNiforme">
+					<h:outputText value="#{pr.uniformeDeportivo.idUniforme}" />
+				</p:column>
+				<p:column headerText="Descripcion Uniforme">
+					<h:outputText
+						value="#{pr.uniformeDeportivo.talla.tallaNombre} #{pr.uniformeDeportivo.uniDescripcion}" />
+				</p:column>
+				<p:column headerText="Cantidad">
+					<h:outputText value="#{pr.detCantidad}" />
+				</p:column>
+				<p:column headerText="Precio Unitario">
+					<h:outputText value="#{pr.detProfPrecioUnitario}" />
+				</p:column>
+				<p:column headerText="Valor Total">
+					<h:outputText value="#{pr.detProfPrecioTotal}" />
+					<f:facet name="footer">
+						<h:outputText value="#{beanCliente.proforma.profValorTotal}" />
+					</f:facet>
+				</p:column>
+			</p:dataTable>
+			<div align="center">
+				<p:panel>
+					<p:commandButton value="Guardar Proforma" update="@form"
+						 action="#{beanCliente.actionRegistrarProforma()}" />
+				</p:panel>
+			</div>
+		</div>
+	</h:form>
+</body>
+</html>
